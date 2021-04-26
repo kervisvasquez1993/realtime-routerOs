@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Http\Controllers\TestController;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -9,6 +10,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class RealTimeRouterOs implements ShouldBroadcast
 {
@@ -32,6 +34,9 @@ class RealTimeRouterOs implements ShouldBroadcast
      */
     public function broadcastOn()
     {
+        Log::debug($this->data);
         return new Channel('routerOs');
     }
+
+ 
 }
