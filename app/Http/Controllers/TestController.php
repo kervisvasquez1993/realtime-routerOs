@@ -24,10 +24,7 @@ class TestController extends Controller
         ]);
         /* ether1_FO_Cantv */
         // Execute export command via ssh, because API /export method has a bug
-        $respuesta = $client->query('/interface/getall')->read();
-
-        $respuestaJson = json_encode($respuesta);
-        
+        $respuesta = $client->query('/interface/getall')->read();        
         $data = $this->convert_from_latin1_to_utf8_recursively($respuesta);
         return ($data);
     }
