@@ -38,10 +38,14 @@ class RouterStart extends Command
      *
      * @return int
      */
+    private $test = "kervis";
     public function handle()
     {
         $ejemplo = new TestController();
         $data = $ejemplo->index();
-        Broadcast( new RealTimeRouterOs($data));
+       
+       
+          Broadcast( new RealTimeRouterOs($this->test));
+       
     }
 }
