@@ -45,7 +45,7 @@ class RouterStart extends Command
         $data = $ejemplo->index();
        
        
-          Broadcast( new RealTimeRouterOs($this->test));
+          Broadcast( new RealTimeRouterOs($data));
        
     }
 }
