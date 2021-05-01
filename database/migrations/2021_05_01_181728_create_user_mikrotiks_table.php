@@ -15,6 +15,10 @@ class CreateUserMikrotiksTable extends Migration
     {
         Schema::create('user_mikrotiks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->string('host');
+            $table->string('user_host');
+            $table->string('password');
             $table->timestamps();
         });
     }
