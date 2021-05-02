@@ -15,6 +15,7 @@ class CreateInfoMikrotiksTable extends Migration
     {
         Schema::create('info_mikrotiks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_mikrotik_id')->references('id')->on('user_mikrotiks');
             $table->string('router_id')->nullable();
             $table->string('router_name')->nullable();
             $table->string('router_default_name')->nullable();
