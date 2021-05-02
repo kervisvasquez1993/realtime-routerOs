@@ -15,6 +15,7 @@ class CreateInfoMikrotiksTable extends Migration
     {
         Schema::create('info_mikrotiks', function (Blueprint $table) {
             $table->id();
+            $table->string('numero_puerto');
             $table->string('router_id')->nullable();
             $table->string('router_name')->nullable();
             $table->string('router_default_name')->nullable();

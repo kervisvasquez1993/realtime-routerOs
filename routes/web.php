@@ -1,7 +1,9 @@
 <?php
+namespace App;
 
-use App\Http\Controllers\TestController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +24,4 @@ Route::resource('/inicio', 'TestController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('usermikrotiks', 'UserMikrotikController');
