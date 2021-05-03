@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('RouterOs ')}}</div>
                 
                     @php
-                        $vars = json_decode( $clientes );    
+                        $vars = json_decode( $clientess );    
                         $puerto = 0;
                         
                         foreach ($vars as $valor) {    
@@ -27,8 +27,12 @@
                             
                             
                           
-                        }
+                        } 
+
+
                     @endphp
+
+
                   
                         
 
