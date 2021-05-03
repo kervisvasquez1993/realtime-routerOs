@@ -17,9 +17,7 @@
                             {{ session('flash') }}
                         </div>
                     @endif
-                    
                     <ul class="list-group list-group-flush">
-                        
                     @foreach($user_routes as $user_route)
                      <li class="list-group-item d-flex justify-content-between">
                          <div>
@@ -34,8 +32,6 @@
                         </div>
                          
                      </li>
-                        
-                      
                     @endforeach
                     </ul>
                 </div>

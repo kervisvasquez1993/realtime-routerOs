@@ -753,31 +753,52 @@ class InfoMikrotikController extends Controller
     return $array;
    
     }
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\InfoMikrotik  $infoMikrotik
-     * @return \Illuminate\Http\Response
-     */
-    public function show(InfoMikrotik $infoMikrotik, $interfaz)
+    public function mostrarInfo()
     {
-        //
+      $array =   array (
+        '.id' => '*5',
+        'name' => 'ether1_FO_Cantv',
+        'default-name' => 'ether1',
+        'type' => 'ether',
+        'mtu' => '1500',
+        'actual-mtu' => '1500',
+        'l2mtu' => '1580',
+        'max-l2mtu' => '10222',
+        'mac-address' => 'C4:AD:34:E0:2E:C8',
+        'last-link-down-time' => 'apr/04/2021 14:47:14',
+        'last-link-up-time' => 'apr/04/2021 15:03:01',
+        'link-downs' => '1',
+        'rx-byte' => '5398882760130',
+        'tx-byte' => '1034884109525',
+        'rx-packet' => '5148995881',
+        'tx-packet' => '3157453451',
+        'rx-drop' => '0',
+        'tx-drop' => '0',
+        'tx-queue-drop' => '2425895',
+        'rx-error' => '0',
+        'tx-error' => '0',
+        'fp-rx-byte' => '5398882760130',
+        'fp-tx-byte' => '1034884109525',
+        'fp-rx-packet' => '5148995881',
+        'fp-tx-packet' => '3157453451',
+        'running' => 'true',
+        'disabled' => 'false',
+        'comment' => '::: Interfaz para FO CANTV port 4',
+      );
+      return $array;
+    }
+    public function show($id, $interfaz)
+    {
+        $userMikrotik = $userMikrotik = UserMikrotik::findOrFail($id); 
+        /* pasamos por parametros los id de la y la interfaz para efecutar el comando  */
+        $arrayTest = json_encode($this->mostrarInfo());
+        return view('infoMikrotik.show', compact('arrayTest'));
     }
 
     /**
