@@ -20,24 +20,37 @@ class InfoMikrotikController extends Controller
         $userMikrotik = UserMikrotik::findOrFail($id); 
         
         /* conexion al clinete via api */
-        /* $client = new Client([
+        /* $clientes = new Client([
             'host'     => $userMikrotik->host,
             'user'     => $userMikrotik->user_host,
             'pass'     => $userMikrotik->password,
             
-        ]); */
+        ]);  */
 
-        $clientes = json_encode($this->arrayPrueba());
+       $clientes = json_encode($this->arrayPrueba()); 
         
         return view('infoMikrotik.index', compact('userMikrotik', 'clientes' , 'id'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
+    public  function convert_from_latin1_to_utf8_recursively($dat)
+    {
+       if (is_string($dat)) {
+          return utf8_encode($dat);
+       } elseif (is_array($dat)) {
+          $ret = [];
+          foreach ($dat as $i => $d) $ret[ $i ] = self::convert_from_latin1_to_utf8_recursively($d);
+ 
+          return $ret;
+       } elseif (is_object($dat)) {
+          foreach ($dat as $i => $d) $dat->$i = self::convert_from_latin1_to_utf8_recursively($d);
+ 
+          return $dat;
+       } else {
+          return $dat;
+       }
+    }
+  
     public function arrayPrueba()
     {
        $array =  array (
