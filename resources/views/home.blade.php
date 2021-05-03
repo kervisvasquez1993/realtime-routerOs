@@ -27,7 +27,7 @@
                              <div><span class="font-weight-bold">Usuario Host: </span> {{$user_route->user_host}}</div>
                          </div>
                          <div>
-                            <button type="button" class="btn btn-sm btn-success">Ver Información</button>
+                            <a href="{{route('infoMikrotiks.index', ['id' => $user_route->id ])}}" class="btn btn-sm btn-success">Ver Información</a>
                             <a href="{{route('usermikrotiks.edit', [ 'usermikrotik' => $user_route->id])}}" class="btn btn-sm btn-warning">Editar</a>
                             <a href="{{route('usermikrotiks.edit', [ 'usermikrotik' => $user_route->id])}}" class="btn btn-sm btn-danger">Eliminar</a>
                             

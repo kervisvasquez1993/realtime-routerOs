@@ -25,3 +25,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('usermikrotiks', 'UserMikrotikController');
+Route::get('infoMikrotiks/{id}', 'InfoMikrotikController@index')->name('infoMikrotiks.index');
+Route::get('infoMikrotiks/{id}/{interfaz}', 'InfoMikrotikController@show')->name('infoMikrotiks.show');
