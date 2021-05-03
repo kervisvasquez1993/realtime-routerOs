@@ -20,14 +20,18 @@ class InfoMikrotikController extends Controller
         $userMikrotik = UserMikrotik::findOrFail($id); 
         
         /* conexion al clinete via api */
-        $clientes = new Client([
+        $client = new Client([
             'host'     => $userMikrotik->host,
             'user'     => $userMikrotik->user_host,
             'pass'     => $userMikrotik->password,
             
         ]);  
 
-       $clientes = json_encode($this->arrayPrueba()); 
+       /* $clientes = json_encode($this->arrayPrueba());  */
+
+       $respuesta = $client->query('/interface/getall')->read();        
+       $data = $this->convert_from_latin1_to_utf8_recursively($respuesta);
+       $clientes = json_encode($data);
         
         return view('infoMikrotik.index', compact('userMikrotik', 'clientes' , 'id'));
     }
@@ -765,11 +769,6 @@ class InfoMikrotikController extends Controller
     
     return $array;
    
-    }
-   
-    public function store(Request $request)
-    {
-        //
     }
 
     public function mostrarInfo()
