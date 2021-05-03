@@ -20,12 +20,12 @@ class InfoMikrotikController extends Controller
         $userMikrotik = UserMikrotik::findOrFail($id); 
         
         /* conexion al clinete via api */
-        /* $clientes = new Client([
+        $clientes = new Client([
             'host'     => $userMikrotik->host,
             'user'     => $userMikrotik->user_host,
             'pass'     => $userMikrotik->password,
             
-        ]);  */
+        ]);  
 
        $clientes = json_encode($this->arrayPrueba()); 
         
