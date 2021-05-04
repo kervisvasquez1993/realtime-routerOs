@@ -6,6 +6,7 @@ use RouterOS\Client;
 use App\InfoMikrotik;
 use App\UserMikrotik;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class InfoMikrotikController extends Controller
 {
@@ -31,9 +32,10 @@ class InfoMikrotikController extends Controller
 
        $respuesta = $client->query('/interface/getall')->read();        
        $data = $this->convert_from_latin1_to_utf8_recursively($respuesta);
-       $clientes = json_encode($data);
+       $clientess = json_encode($data);
         
-        return view('infoMikrotik.index', compact('userMikrotik', 'clientes' , 'id'));
+       
+       return view('infoMikrotik.index', compact('userMikrotik', 'clientess' , 'id'));
     }
 
 
@@ -810,6 +812,13 @@ class InfoMikrotikController extends Controller
         $userMikrotik = $userMikrotik = UserMikrotik::findOrFail($id); 
         /* pasamos por parametros los id de la y la interfaz para efecutar el comando  */
         $arrayTest = json_encode($this->mostrarInfo());
+
+        dispatch( function($arrayTest) {
+          Artisan::call('realtime:execute', [
+            'datos' => $arrayTest
+        ]);
+        });
+        
         return view('infoMikrotik.show', compact('arrayTest'));
     }
 
