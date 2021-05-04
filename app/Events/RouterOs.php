@@ -35,7 +35,7 @@ class RouterOs implements ShouldBroadcast
     public function broadcastOn()
     {
         
-        Log::debug($this->time);
+        
         return new Channel('routerApi');
     }
 }

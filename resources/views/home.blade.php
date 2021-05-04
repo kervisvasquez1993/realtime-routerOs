@@ -40,3 +40,23 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script>
+          Echo.channel('routerApi')
+         .listen('RouterOs', (e) => {
+            console.log(e)
+            /* timerElement.innerText = e.time;
+
+            circleElement.classList.add('refresh');
+
+            winnerElement.classList.add('d-none');
+
+            resultElement.innerText = '';
+            resultElement.classList.remove('text-success');
+            resultElement.classList.remove('text-danger'); */
+        })
+      
+</script>
+    </script>
+@endpush

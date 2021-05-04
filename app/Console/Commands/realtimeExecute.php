@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use RouterOS\Client;
 use App\Events\RouterOs;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,7 +16,7 @@ class realtimeExecute extends Command
      */
 
     
-    protected $signature = 'realtime:execute {datos}';
+    protected $signature = 'realtime:execute';
 
     /**
      * The console command description.
@@ -42,16 +43,24 @@ class realtimeExecute extends Command
      */
     public function handle()
     {
-        while(true)
-        {
-            
-          broadcast(new RouterOs($this->argument('datos')));
-
-            $this->time++;
-            sleep(1);
-           
-        }
         
+        $client = new Client([
+            'host'     => '192.168.10.1',
+            'user'     => 'Kervis',
+            'pass'     => 'Dynamics123',            
+        ]);
+        /* ether1_FO_Cantv */
+        // Execute export command via ssh, because API /export method has a bug
+       
+       
+        while (true) {
+            $respuesta = $client->query('/interface/getall')->read();        
+            $data = $this->convert_from_latin1_to_utf8_recursively($respuesta);
+           
+            broadcast(new RouterOs($data[0]));
+            sleep(1);
+
+        }
     }
     public  function convert_from_latin1_to_utf8_recursively($dat)
     {
