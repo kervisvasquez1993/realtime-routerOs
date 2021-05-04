@@ -57,7 +57,7 @@
                        <li class="list-group-item d-flex justify-content-between">
                         <div>
                             <h5 class="d-flex justify-content-between">
-                                <span class="font-weight-bold"> fp-tx-byte : <p id=""></p> </span> 
+                                <span class="font-weight-bold"> fp-tx-byte : <p id="fpTxByte"></p> </span> 
                                
                             </h5>
                             
@@ -77,7 +77,7 @@
                        <li class="list-group-item d-flex justify-content-between">
                         <div>
                             <h5 class="d-flex justify-content-between">
-                                <span class="font-weight-bold"> fp-tx-packet : <p id=""></p> </span>     
+                                <span class="font-weight-bold"> fp-tx-packet : <p id="fpTxPacket"></p> </span>     
                             </h5>
                             
                         </div>                        
@@ -135,29 +135,40 @@
             fpTxPacket     = document.getElementById('fpTxPacket'),
             lastLinkUpTime = document.getElementById('lastLinkUpTime'),
             macAddress     = document.getElementById('macAddress'),
-            rxByte         = document.getElementById('rxByte'), /*  */
-            rxPacket       = document.getElementById('rxPacket'),/*  */
+            rxByte         = document.getElementById('rxByte'), /* listo */
             txByte         = document.getElementById('txByte'), /*  */
+            rxPacket       = document.getElementById('rxPacket'),/* listo */
             txPacket       = document.getElementById('txPacket'), /*  */
             type           = document.getElementById('type'),
             txQqueueDrop   = document.getElementById('txQqueueDrop') /*  */
 
-
-
-
-
-
-
-
           Echo.channel('routerApi')
          .listen('RouterOs', (e) => {
+            let time = e.time
+            rxPacket.innerText = time["rx-packet"]
+            rxByte.innerText = time['rx-byte']
+            txByte.innerText = time['tx-byte']
+            txPacket.innerText = time['tx-packet']
+            txQqueueDrop.innerText = time['tx-queue-drop']
+            fpRxByte.innerText = time['fp-rx-byte']
+            fpTxByte.innerText = time['fp-tx-byte']
+            fpRxPacket.innerText = time['fp-rx-packet']
+            fpTxPacket.innerText = time['fp-tx-packet']
+
+
+
+
+
+
+            
+            
             
               
             
 
             
 
-           
+            
         })
       
 </script>
