@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <h5 class="py-3 px-2">Información En tiempo Real de la interfaz <span id="interfazName"></span></h5>
+            <h5 class="py-3 px-2">Consumo Total de la interfaz<span id="interfazName"></span></h5>
             <div class="card">
                 <div class="card-header"></div>                        
                 <div class="card-body">
@@ -145,6 +145,8 @@
           Echo.channel('routerApi')
          .listen('RouterOs', (e) => {
             let time = e.time
+            
+            nombrePuerto.innerText = time['name']
             rxPacket.innerText = time["rx-packet"]
             rxByte.innerText = time['rx-byte']
             txByte.innerText = time['tx-byte']
@@ -153,24 +155,12 @@
             fpRxByte.innerText = time['fp-rx-byte']
             fpTxByte.innerText = time['fp-tx-byte']
             fpRxPacket.innerText = time['fp-rx-packet']
-            fpTxPacket.innerText = time['fp-tx-packet']
-
-
-
-
-
-
-            
-            
-            
-              
-            
-
-            
-
-            
-        })
-      
-</script>
+            fpTxPacket.innerText = time['fp-tx-packet']    
+         }) 
+         .listen('VlanOs', (e) => {
+             console.log(e.time)
+         })
+    </script>
     
 @endpush
+

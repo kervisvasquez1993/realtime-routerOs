@@ -30,11 +30,15 @@ class InfoMikrotikController extends Controller
 
        /* $clientes = json_encode($this->arrayPrueba());  */
 
-       $respuesta = $client->query('/interface/getall')->read();        
+       $respuesta = $client->query('/interface/getall', [
+        ['type', 'vlan']
+       ])->read();   
+            
        $data = $this->convert_from_latin1_to_utf8_recursively($respuesta);
        $clientess = json_encode($data);
         
        
+          
        return view('infoMikrotik.index', compact('userMikrotik', 'clientess' , 'id'));
     }
 
@@ -813,11 +817,7 @@ class InfoMikrotikController extends Controller
         /* pasamos por parametros los id de la y la interfaz para efecutar el comando  */
         $arrayTest = json_encode($this->mostrarInfo());
 
-        dispatch( function($arrayTest) {
-          Artisan::call('realtime:execute', [
-            'datos' => $arrayTest
-        ]);
-        });
+
         
         return view('infoMikrotik.show', compact('arrayTest'));
     }

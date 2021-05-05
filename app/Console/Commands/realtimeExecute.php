@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Events\vlan;
 use RouterOS\Client;
 use App\Events\RouterOs;
+use App\Events\VlanOs;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -54,13 +56,21 @@ class realtimeExecute extends Command
        
        
         while (true) {
+            $vlan = $client->query('/interface/getall' ,[['type', 'vlan']])->read();
             $respuesta = $client->query('/interface/getall')->read();        
             $data = $this->convert_from_latin1_to_utf8_recursively($respuesta);
+            $dataVlan = $this->convert_from_latin1_to_utf8_recursively($vlan);
            
             broadcast(new RouterOs($data[0]));
+            $this->vlan($dataVlan);
             sleep(1);
 
         }
+    }
+
+    public function vlan($vlan)
+    {
+        return broadcast(new VlanOs($vlan));
     }
     public  function convert_from_latin1_to_utf8_recursively($dat)
     {
